@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles.css">        
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center">Movie Database</h1>
+
+            <% /*  ----------------------------------------------
+            Repeat the following HTML structure for all movies
+            -------------------------------------------------- */ %>
+
+            <a class="movie-link" href=<% /* link to individual movie URL */ %>>
+            <div class="media movie-list-item">
+                <div class="media-left">
+                    <div class="poster-container">
+                        <img class="media-object movie-poster" src=<% /* link to individual movie poster */ %> />
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <% /* text for individual movie title */ %>
+                        <span class="badge"><% /* text for individual movie rating */ %></span>
+                    </h4>
+                    <div>
+                        <% /* text for individual movie plot */ %>
+                    </div>
+                    <div class="released-date">
+                        Released: <% /* text for individual movie release date */ %>
+                    </div>
+                </div>
+            </div>
+            </a>
+            
+            <% /*  ----------------------------------------------
+            -------------------------------------------------- */ %>
+
+        </div>
+    </body>
+</html>
+
