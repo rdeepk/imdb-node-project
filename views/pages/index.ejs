@@ -12,10 +12,14 @@
                 <button type="submit">Search</button>
             </form>
             <h1 class="text-center">Movie Database</h1>
+            <p> Total Results: <%=totalResults%></p>
 
-            <% for( i= 0; i < movies.length; i++) { %>
-
-            <a class="movie-link" href="/movie/<%= movies[i].id %>">
+            <% for( i= 0; i < movies.length; i++) { 
+                if (search == true) { %>
+            <a class="movie-link" href="/movie/<%= movies[i].id + '?search=true' %>">
+            <% } else { %>
+                <a class="movie-link" href="/movie/<%= movies[i].id %>">
+            <% } %>
             <div class="media movie-list-item">
                 <div class="media-left">
                     <div class="poster-container">

@@ -8,10 +8,10 @@
     <body>
         <div class="container">
             <div id="movie-details">
-                <h1 class="text-center"><% /* text for movie title */ %></h1>
+                <h1 class="text-center"></h1>
                 <div class="row">
                     <div class="col-xs-5">
-                        <img class="movie-poster" src="" />
+                        <img class="movie-poster" src="<%= baseUrl %><%= movie.poster_path %>" />
                     </div>
                     <div class="col-xs-7">
                         <table class="table">
@@ -34,4 +34,3 @@
         </div>
     </body>
 </html>
-
