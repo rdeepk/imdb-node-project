@@ -1,22 +1,60 @@
 // initialize Express in project
-const express = require('express');
-const app = express();
+const express = require('express'),
+bodyParser = require('body-parser'),
+rp = require('request-promise');
 
+var imdbApiKey = "6b41a668e25ec6c8670df1fc29641a7d";
+var imdbRequestUrl = "https://api.themoviedb.org/3/discover/movie?api_key=" + imdbApiKey + "&sort_by=popularity.desc";
+var results;
+
+const app = express();
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: false }));
+
 
 app.get('/', (req, res) => {
-    /* EDIT CODE HERE ----------------------------------
-    render pages/index with data of movies
-    -------------------------------------------------- */
+  rp(imdbRequestUrl)
+  .then(function (response) {
+      results = JSON.parse(response).results;
+      console.log(results);
+      res.render('pages/index',{ movies: results, baseUrl: 'http://image.tmdb.org/t/p/w185'});
+  })
+  .catch(function (error) {
+      console.log(error);
+  });
+    
 })
+
+let getMovieById = ( id ) => {
+  for(let i = 0; i< results.length; i++) {
+    if(results[i].id === Number(id)) {
+      return results[i];
+    }
+  }
+}
+
+app.post('/search', function(req, res){
+  let searchStr = req.body.searchStr;
+  let foundMovies = [];
+  let movies = getmovies();
+    for(i=0; i<movies.length; i++) {
+      console.log("searchimg "+ searchStr);
+      if(movies[i].title.indexOf(searchStr) >=0) {
+        console.log("found");
+        foundMovies.push(movies[i]);
+      }
+    }
+    console.log(foundMovies);
+  res.render('pages/index', { movies : foundMovies });
+})
+
 
 app.get('/movie/:movieId', (req, res) => {
-    /* EDIT CODE HERE ----------------------------------
-    render pages/movie with data of specfic movie
-    -------------------------------------------------- */
+    res.render("pages/movie", { movie: getMovieById(req.params.movieId), baseUrl: 'http://image.tmdb.org/t/p/w185'});
 })
 
-app.use(express.static('public'));
+
 
 // start Express on port 8080
 app.listen(8080, () => {

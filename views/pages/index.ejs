@@ -2,41 +2,42 @@
     <head>
         <title>Home</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/styles.css">        
+        <link rel="stylesheet" href="css/styles.css">        
     </head>
 
     <body>
         <div class="container">
+            <form method="post" action="/search">
+                <input type="text" name="searchStr" id="searchStr" class="" />
+                <button type="submit">Search</button>
+            </form>
             <h1 class="text-center">Movie Database</h1>
 
-            <% /*  ----------------------------------------------
-            Repeat the following HTML structure for all movies
-            -------------------------------------------------- */ %>
+            <% for( i= 0; i < movies.length; i++) { %>
 
-            <a class="movie-link" href=<% /* link to individual movie URL */ %>>
+            <a class="movie-link" href="/movie/<%= movies[i].id %>">
             <div class="media movie-list-item">
                 <div class="media-left">
                     <div class="poster-container">
-                        <img class="media-object movie-poster" src=<% /* link to individual movie poster */ %> />
+                        <img class="media-object movie-poster" src="<%= baseUrl %><%= movies[i].poster_path %>" />
                     </div>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <% /* text for individual movie title */ %>
-                        <span class="badge"><% /* text for individual movie rating */ %></span>
+                        <%= movies[i].title %>
+                        <span class="badge"><%= movies[i].popularity %></span>
                     </h4>
                     <div>
-                        <% /* text for individual movie plot */ %>
+                        <%= movies[i].overview %>
                     </div>
                     <div class="released-date">
-                        Released: <% /* text for individual movie release date */ %>
+                        Released: <%= movies[i].release_date  %>
                     </div>
                 </div>
             </div>
             </a>
             
-            <% /*  ----------------------------------------------
-            -------------------------------------------------- */ %>
+            <% } %>
 
         </div>
     </body>
