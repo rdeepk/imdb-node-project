@@ -37,6 +37,11 @@ a {
 	display: block;
 }
 
+a:focus, a:hover {
+    color: #484848;
+    text-decoration: none;
+}
+
 .site-header {
 	text-align: right;
 }
@@ -47,7 +52,7 @@ a {
 }
 
 .nav a {
-	margin: 20px 0 10px;
+	margin: 30px 0 15px;
 }
 
 .page-links a {
@@ -59,6 +64,68 @@ a {
 	color: grey;
 }
 
+.form-control {
+    height: 50px;
+    padding: 0.333em 0.666em;
+    font-size: 1.123em;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    border-radius: 4px;
+	width: 100%;
+	margin-top: 30px;
+}
+
+.form-control:focus {
+    border: 1px solid #ccc;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: transparent;
+}
+
+
+.site-header a, button {
+	padding: .6em 1.25em;
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+    border-radius: 4px;
+    color: #484848;
+    font-size: 1.25em;
+	font-weight: 300;
+	background: transparent;
+	display: inline-block;
+}
+
+.site-header a:hover, .site-header a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.page-links a:hover, button:hover {
+    background-color: #484848;
+    color: #fff;
+} 
+
+.page-links a {
+	margin-top: 0;
+}
+
+.nav .home {
+	background-color: #484848;
+    color: #fff;
+}
+
+.nav .home:hover {
+	color: #484848;
+	background: transparent;
+}
+
+@media (max-width: 767px) {
+	.nav, .search {
+		text-align: center;
+	}
+}
+
+
 /* Content
 --------------------------------------------- */
 .channel {
@@ -66,6 +133,16 @@ a {
 	margin: 1.428em 0;
 	border-radius: 10px;
 	padding: 2em;
+}
+
+@media (min-width: 768px) {
+	.channel > .row {
+		display: flex;
+	}
+
+	.channel > .row > div:nth-child(3) {
+		border-left: 1px dashed #b5b5b5;
+	}
 }
 
 .channel .description {
@@ -98,7 +175,6 @@ a {
 }
 
 .poster img {
-	border-radius: 10px;
 	max-width: 100%;
 }
 
@@ -141,7 +217,6 @@ dd {
 .followers {
 	text-align: center;
 	padding: 1.071em 0;
-	border-left: 1px dashed #b5b5b5;
 }
 
 .inner-header .followers {
@@ -251,6 +326,8 @@ dd {
 /* Footer
 --------------------------------------------- */
 .site-footer {
-	padding: 3.125em 0;
+	padding: 1em 0;
 	text-align: center;
+	font-size: 14px;
+
 }

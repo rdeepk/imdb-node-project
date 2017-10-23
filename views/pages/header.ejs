@@ -3,7 +3,7 @@
         <title>Movies</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-        <link rel="stylesheet" href="/css/styles.css">        
+        <link rel="stylesheet" href="/css/styles.css">       
     </head>
 
     <body>
@@ -13,34 +13,40 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="nav">
-                            <a href="/">Home</a>
+                            <a href="/" class="home">Home</a>
                             <div class="page-links">
                             <% if (pagination) { 
                             if (( currentPage < totalPages) && (currentPage < 1000 ) ) {
                                 if(search) { %>
-                                <a href="/search?query=<%= searchStr %>&page=<%= ++currentPage %>" id="next">Next</a>
+                                <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)+1 %>" id="next">Next</a>
                             <% } else { %>
                                 <a href="/?page=<%= Number(currentPage)+1 %>" id="next">Next</a>
                             <% }
                             } else { %>
-                                <a href="" id="next" class="disabled">Nexttt</a>
+                                <a href="" id="next" class="disabled">Next</a>
                             <% } 
-                            if (( currentPage > 1)) { %>
-                                <a href="/?page=<%= currentPage-1 %>" id="previous">Previous</a>
+                            if (( currentPage > 1)) { 
+                                if(search) { %>
+                                    <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
+                                <% } else { %>
+                                <a href="/?page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
+                                <% } %>
                             <% } else { %>
-                                <a href="" class="disabled" id="previous">Previousss</a>
+                                <a href="" class="disabled" id="previous">Previous</a>
                             <% }
                              } %>
                             </div>
+                            <% if(pagination) { %>
+                                <p> Total Results: <%=totalResults%></p>
+                            <% } %>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="search">
-                            <% if(pagination) { %>
-                            <p> Total Results: <%=totalResults%></p>
-                            <% } %>
                             <form method="post" action="/search">
-                                <input type="text" name="searchStr" id="searchStr" class="" />
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="searchStr" id="searchStr" placeholder="Search Kewords" autocomplete="off" required="required">
+                            </div>
                                 <button type="submit">Search</button>
                             </form>
                         </div>

@@ -56,14 +56,13 @@ let getMovieById = (id, search) => {
 }
 
 app.all('/search', function (req, res) {
+  let imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey;
   let currentPage = req.query.page ? req.query.page : 1;
   imdbSearchRequestUrl += '&page='+currentPage;
-  let searchStr = req.body.searchStr? req.body.searchStr: req.query.query;
-  console.log(imdbSearchRequestUrl + "&query=" +searchStr);
+  let searchStr = req.body.searchStr ? req.body.searchStr: req.query.query;
   rp(imdbSearchRequestUrl + "&query=" +searchStr)
     .then(function (response) {
       response = JSON.parse(response);
-      console.log(response);
       searchResults = response.results;
       res.render('pages/index', {
         movies: searchResults,
