@@ -1,0 +1,295 @@
+$color_1: #484848;
+$color_2: #33c2a6;
+$color_3: #fff;
+$color_4: #777;
+$color_5: #fb831e;
+$font_family: 'Open Sans', sans-serif;
+$background_color_1: #ddd;
+$background_color_2: #484848;
+$background_color_3: #f1f1f1;
+
+/* Base Styles
+--------------------------------------------- */
+body {
+	font-family: $font_family;
+	font-size: 16px;
+	line-height: 1.5;
+	color: $color_1;
+	padding: 20px 0;
+}
+
+h1 {
+	font-size: 2.5em;
+	font-weight: 300;
+	line-height: 1.2;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+h2 {
+	font-size: 2.857em;
+	font-weight: 300;
+	line-height: 1.2em;
+	color: $color_2;
+	margin-top: 0;
+	text-transform: uppercase;
+}
+
+a {
+	color: $color_1;
+	display: block;
+	&:focus,
+	&:hover {
+		color: $color_1;
+		text-decoration: none;
+	}
+}
+
+/* Site-header
+--------------------------------------------- */
+.site-header {
+	text-align: right;
+	h1 {
+		margin-bottom: 30px;
+	}
+	a {
+		height: 42px;
+		padding: 0.5em 1em;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		color: $color_1;
+		font-size: 1.1em;
+		line-height: 1.25;
+		font-weight: 300;
+		background: transparent;
+		display: inline-block;
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			outline: none;
+		}
+	}
+}
+
+.nav {
+	text-align: left;
+	margin-left: 10px;
+	.home {
+		background-color: $background_color_2;
+		color: $color_3;
+		&:hover {
+			color: $color_1;
+			background: transparent;
+		}
+	}
+}
+
+.page-links {
+	a {
+		display: inline;
+		margin-top: 0;
+		&:hover {
+			background-color: $background_color_2;
+			color: $color_3;
+		}
+	}
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+	color: $color_1;
+	background-color: $background_color_1 !important;
+}
+
+.search {
+	margin-bottom: 15px;
+}
+
+.form-control {
+	height: 42px;
+	padding: 0.5em 1em;
+	font-size: 1.1em;
+	line-height: 1;
+	border: 1px solid #ccc;
+	box-shadow: none;
+	border-radius: 4px;
+	margin: -4px 0 0;
+	&:focus {
+		border: 1px solid #ccc;
+		outline: 0;
+		-webkit-box-shadow: none;
+		box-shadow: transparent;
+	}
+}
+
+button {
+	height: 42px;
+	padding: 0.5em 1em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: $color_1;
+	font-size: 1.1em;
+	line-height: 1.25;
+	font-weight: 300;
+	background: transparent;
+	display: inline-block;
+	&:hover {
+		background-color: $background_color_2;
+		color: $color_3;
+	}
+}
+
+/* Content
+--------------------------------------------- */
+.movie {
+	border: 1px solid #cacaca;
+	margin: 1.428em 0;
+	border-radius: 10px;
+	padding: 2em;
+	.description {
+		font-weight: 400;
+		color: $color_4;
+	}
+	.url {
+		font-style: italic;
+		background-color: $background_color_3;
+		font-size: 0.857em;
+		padding: 0.25em 0.583em;
+		border-radius: 3px;
+		margin-top: 20px;
+		display: inline-block;
+	}
+}
+
+.poster,
+.movie-poster {
+	text-align: center;
+	img {
+		max-width: 100%;
+	}
+}
+
+.header-text {
+	p {
+		margin-bottom: 0;
+	}
+}
+
+dt {
+	float: left;
+	color: $color_4;
+	font-weight: 400;
+	line-height: 1.7;
+	margin-bottom: 0.230em;
+	clear: both;
+	width: 25%;
+}
+
+dd {
+	float: left;
+	color: $color_4;
+	font-weight: 400;
+	line-height: 1.7;
+	margin-bottom: 0.230em;
+	width: 75%;
+}
+
+.followers {
+	text-align: center;
+	padding: 1.071em 0;
+	.value,
+	.title {
+		font-size: 1.142em;
+		font-weight: 400;
+		line-height: 1.2;
+		color: $color_4;
+		text-transform: uppercase;
+	}
+}
+.inner-header {
+	.followers {
+		border-left: none;
+	}
+}
+
+@media (max-width: 767px) {
+	.form-control {
+		margin: 10px 0;
+	}
+	.nav {
+		text-align: center;
+	}
+	.search {
+		text-align: center;
+	}
+	.movie {
+		padding: 2em;
+		.row {
+			&:first-child {
+				margin-bottom: 15px;
+			}
+		}
+	}
+	.header-text {
+		width: 100%;
+		text-align: center;
+		margin-top: 1.071em;
+		h2 {
+			margin-bottom: 20px;
+		}
+	}
+	h2 {
+		font-size: 2em;
+		word-wrap: break-word;
+	}
+	.followers {
+		border-left: none;
+		border-top: 1px dashed #b5b5b5;
+		margin-top: 2em;
+		.value {
+			font-size: 2.21em;
+		}
+	}
+	dt {
+		width: 100%;
+		font-weight: 700;
+	}
+	dd {
+		width: 100%;
+	}
+	.seperator {
+		display: none;
+	}
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+	button {
+		margin-top: 10px;
+	}
+	.followers {
+		.value {
+			font-size: 2.857em;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.movie {
+		& >.row {
+			display: flex;
+			& >div:nth-child(3) {
+                border-left: 1px dashed #b5b5b5;
+			}
+		}
+	}
+}
+
+
+/* Footer
+--------------------------------------------- */
+.site-footer {
+	padding: 1em 0;
+	text-align: center;
+	font-size: 14px;
+}
