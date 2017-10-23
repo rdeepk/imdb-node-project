@@ -5,7 +5,7 @@ const express = require('express'),
 
 var imdbApiKey = "6b41a668e25ec6c8670df1fc29641a7d";
 var imdbRequestUrl = "https://api.themoviedb.org/3/discover/movie?api_key=" + imdbApiKey + "&sort_by=popularity.desc";
-var imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey + "&query=";
+var imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey;
 var results, searchResults;
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', (req, res) => {
   let currentPage = req.query.page ? req.query.page : 1;
-  imdbRequestUrl = imdbRequestUrl + '&page='+currentPage;
+  imdbRequestUrl +='&page='+currentPage;
   rp(imdbRequestUrl)
     .then(function (response) {
       response = JSON.parse(response);
@@ -28,7 +28,9 @@ app.get('/', (req, res) => {
         baseUrl: 'http://image.tmdb.org/t/p/w342',
         search: false,
         totalResults: response.total_results,
-        currentPage: currentPage
+        currentPage: currentPage,
+        pagination: true,
+        totalPages: response.total_pages
       });
     })
     .catch(function (error) {
@@ -53,17 +55,25 @@ let getMovieById = (id, search) => {
   }
 }
 
-app.post('/search', function (req, res) {
-  let searchStr = req.body.searchStr;
-  rp(imdbSearchRequestUrl + searchStr)
+app.all('/search', function (req, res) {
+  let currentPage = req.query.page ? req.query.page : 1;
+  imdbSearchRequestUrl += '&page='+currentPage;
+  let searchStr = req.body.searchStr? req.body.searchStr: req.query.query;
+  console.log(imdbSearchRequestUrl + "&query=" +searchStr);
+  rp(imdbSearchRequestUrl + "&query=" +searchStr)
     .then(function (response) {
       response = JSON.parse(response);
+      console.log(response);
       searchResults = response.results;
       res.render('pages/index', {
         movies: searchResults,
         baseUrl: 'http://image.tmdb.org/t/p/w342',
         search: true,
-        totalResults: response.total_results
+        totalResults: response.total_results,
+        pagination: true,
+        currentPage: currentPage,
+        searchStr: searchStr,
+        totalPages: response.total_pages
       });
     })
     .catch(function (error) {
@@ -77,13 +87,13 @@ app.get('/movie/:movieId', (req, res) => {
     res.render("pages/movie", {
       movie: getMovieById(req.params.movieId, true),
       baseUrl: 'http://image.tmdb.org/t/p/w342',
-      totalResults: false
+      pagination: false
     });
   } else {
     res.render("pages/movie", {
       movie: getMovieById(req.params.movieId, false),
       baseUrl: 'http://image.tmdb.org/t/p/w342',
-      totalResults: false
+      pagination: false
     });
   }
 })

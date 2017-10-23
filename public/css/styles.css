@@ -54,6 +54,11 @@ a {
 	display: inline;
 }
 
+.disabled {
+	pointer-events: none;
+	color: grey;
+}
+
 /* Content
 --------------------------------------------- */
 .channel {

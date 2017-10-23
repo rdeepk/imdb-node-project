@@ -15,14 +15,28 @@
                         <div class="nav">
                             <a href="/">Home</a>
                             <div class="page-links">
-                                <a href"" id="next">Next</a>
-                                <a href="" id="previous">Previous</a>
+                            <% if (pagination) { 
+                            if (( currentPage < totalPages) && (currentPage < 1000 ) ) {
+                                if(search) { %>
+                                <a href="/search?query=<%= searchStr %>&page=<%= ++currentPage %>" id="next">Next</a>
+                            <% } else { %>
+                                <a href="/?page=<%= Number(currentPage)+1 %>" id="next">Next</a>
+                            <% }
+                            } else { %>
+                                <a href="" id="next" class="disabled">Nexttt</a>
+                            <% } 
+                            if (( currentPage > 1)) { %>
+                                <a href="/?page=<%= currentPage-1 %>" id="previous">Previous</a>
+                            <% } else { %>
+                                <a href="" class="disabled" id="previous">Previousss</a>
+                            <% }
+                             } %>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="search">
-                            <% if(totalResults) { %>
+                            <% if(pagination) { %>
                             <p> Total Results: <%=totalResults%></p>
                             <% } %>
                             <form method="post" action="/search">
