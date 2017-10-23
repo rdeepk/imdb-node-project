@@ -7,6 +7,7 @@ var imdbApiKey = "6b41a668e25ec6c8670df1fc29641a7d";
 var imdbRequestUrl = "https://api.themoviedb.org/3/discover/movie?api_key=" + imdbApiKey + "&sort_by=popularity.desc";
 var imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey;
 var results, searchResults;
+var port = process.argv[2] || 8080;
 
 const app = express();
 app.use(express.static('public'));
@@ -15,7 +16,9 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
+/**
+ * @summary Respond to get request for Home link.
+ */
 app.get('/', (req, res) => {
   let currentPage = req.query.page ? req.query.page : 1;
   imdbRequestUrl +='&page='+currentPage;
@@ -39,6 +42,9 @@ app.get('/', (req, res) => {
 
 })
 
+/**
+ * @summary Returns movie object by id.
+ */
 let getMovieById = (id, search) => {
   var data;
   if (search) {
@@ -55,6 +61,9 @@ let getMovieById = (id, search) => {
   }
 }
 
+/**
+ * @summary Respond to all requests for search.
+ */
 app.all('/search', function (req, res) {
   let imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey;
   let currentPage = req.query.page ? req.query.page : 1;
@@ -80,7 +89,9 @@ app.all('/search', function (req, res) {
     });
 })
 
-
+/**
+ * @summary Respond to request for a movie by id.
+ */
 app.get('/movie/:movieId', (req, res) => {
   if (req.query.search) {
     res.render("pages/movie", {
@@ -99,8 +110,8 @@ app.get('/movie/:movieId', (req, res) => {
 
 
 
-// start Express on port 8080
-app.listen(8080, () => {
-  console.log('Server Started on http://localhost:8080');
+// start Express on port
+app.listen(port, () => {
+  console.log('Server Started on http://localhost:'+port);
   console.log('Press CTRL + C to stop server');
 });

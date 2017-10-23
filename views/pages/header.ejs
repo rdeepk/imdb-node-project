@@ -1,57 +1,75 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
         <title>Movies</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-        <link rel="stylesheet" href="/css/styles.css">       
+        <link rel="stylesheet" href="/css/style.css">       
     </head>
-
     <body>
         <div class="container">
+
            <header class="site-header">
                 <h1>Movies Database</h1>
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <div class="nav">
-                            <a href="/" class="home">Home</a>
+                            
                             <div class="page-links">
-                            <% if (pagination) { 
-                            if (( currentPage < totalPages) && (currentPage < 1000 ) ) {
-                                if(search) { %>
-                                <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)+1 %>" id="next">Next</a>
-                            <% } else { %>
-                                <a href="/?page=<%= Number(currentPage)+1 %>" id="next">Next</a>
-                            <% }
-                            } else { %>
-                                <a href="" id="next" class="disabled">Next</a>
-                            <% } 
-                            if (( currentPage > 1)) { 
-                                if(search) { %>
-                                    <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
-                                <% } else { %>
-                                <a href="/?page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
-                                <% } %>
-                            <% } else { %>
-                                <a href="" class="disabled" id="previous">Previous</a>
-                            <% }
-                             } %>
+                                <a href="/" class="home">Home</a>
+
+                                <!--check if pagination is to be displayed -->
+                                <% if (pagination) {
+
+                                    // check if valid previous page link exists
+                                    if (( currentPage > 1)) { 
+
+                                        //if prvious page link is for search request or random movies from home page
+                                        if(search) { %>
+                                            <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
+                                        <% } else { %>
+                                            <a href="/?page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
+                                        <% } %>
+
+                                    <% } else { %>
+
+                                        <!--if invalid previous page then add disabled class -->
+                                        <a href="" class="disabled" id="previous">Previous</a>
+                                    <% }
+
+                                    // check if valid next page link exists
+                                    if (( currentPage < totalPages) && (currentPage < 1000 ) ) {
+
+                                        //if next page link is for search request or random movies from home page
+                                        if(search) { %>
+                                            <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)+1 %>" id="next">Next</a>
+                                        <% } else { %>
+                                            <a href="/?page=<%= Number(currentPage)+1 %>" id="next">Next</a>
+                                         <% }
+
+                                    } else { %>
+                                        <!-- if invalid next page then add disabled class -->
+                                        <a href="" id="next" class="disabled">Next</a>
+                                    <% }
+                                } %>
                             </div>
-                            <% if(pagination) { %>
-                                <p> Total Results: <%=totalResults%></p>
-                            <% } %>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
+                        <!-- Search form -->
                         <div class="search">
-                            <form method="post" action="/search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="searchStr" id="searchStr" placeholder="Search Kewords" autocomplete="off" required="required">
-                            </div>
-                                <button type="submit">Search</button>
+                            <form method="post" action="/search" class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="searchStr" id="searchStr" placeholder="Search Keywords" autocomplete="off" required="required">
+                                    <button type="submit">Search</button>
+                                </div>
                             </form>
                         </div>
+                        <!-- In case of individual movie page, no total results required -->
+                        <% if(pagination) { %>
+                            <p> Total Results: <%=totalResults%></p>
+                        <% } %>
                     </div>
                 </div>
-            </header>
-            <!-- .site-header -->
+            </header><!-- .site-header -->
             

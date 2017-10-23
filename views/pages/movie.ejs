@@ -1,32 +1,37 @@
 <% include header %>
     <div class="row">
-      <div class="col-sm-12">
-         <div class="content">
-            <div class="channel">
-               <div class="row">
-                  <div class="col-sm-5">
-                    <div class="inner-header">
-                    <div class="movie-poster"><img src="<%= baseUrl %><%= movie.poster_path %>"></div>
-                    <div class="followers">
-                        <p class="value"><%= movie.vote_count %></p>
-                        <p class="title">Votes Count</p>
+        <div class="col-sm-12">
+            <div class="content">
+                <div class="movie">
+                    
+                    <div class="row">
+                        <div class="col-sm-5">
+
+                            <div class="inner-header">
+                                <div class="movie-poster"><img src="<%= baseUrl %><%= movie.poster_path %>"></div>
+                                <div class="followers">
+                                    <p class="value"><%= movie.vote_count %></p>
+                                    <p class="title">Votes Count</p>
+                                </div>
+                            </div><!-- inner-header -->
+
+                        </div>
+                        <div class="col-sm-7">
+                            <h2><%= movie.title %></h2>
+                            <dl>
+                                <% for (key in movie) { %>
+                                <!--display all key value pairs in a movie object -->
+                                    <dt><%= key.split('_').join(' ').toUpperCase(); %></dt>
+                                    <dd><span class="seperator">: </span><%= movie[key] %></dd>
+                                <% } %>
+                            </dl>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-7">
-                  <h2><%= movie.title %></h2>
-                     <dl>
-                        <% for (key in movie) { %>
-                        <dt><%= key.split('_').join(' ').toUpperCase(); %></dt>
-                        <dd><span class="seperator">: </span><%= movie[key] %></dd>
-                        <% } %>
-                     </dl>
-                     <div class="clearfix"></div>
-                </div>
-               </div>
-            </div>
+                </div><!-- .movie -->
+
+            </div><!-- .content -->
+
         </div>
-        <!-- .content -->
-      </div>
-   </div>
- <% include footer %>
+    </div>
+<% include footer %>

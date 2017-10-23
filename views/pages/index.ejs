@@ -1,36 +1,40 @@
 <% include header %>
-
-
     <div class="row">
-      <div class="col-sm-12">
-         <div class="content">
-                <% for( i= 0; i < movies.length; i++) { 
-            if (search == true) { %>
-                <a class="movie-link" href="/movie/<%= movies[i].id + '?search=true' %>">
-                <% } else { %>
-                    <a class="movie-link" href="/movie/<%= movies[i].id %>">
-                <% } %>        
-            <div class="channel ">
-               <div class="row">
-                <div class="col-xs-12 col-sm-3">
-                    <div class="poster"><img src="<%= baseUrl %><%= movies[i].poster_path %>"></div>
-                </div>
-                  <div class="col-xs-12 col-sm-6 col-md-7">
-                     <div class="header-text">
-                        <h2><%= movies[i].title %></h2>
-                        <p class="description"><%= movies[i].overview %></p>
-                        <p class="url">Release Date: <%= movies[i].release_date %></p>
-                     </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-3 col-md-2">
-                     <div class="followers">
-                        <p class="value"><%= movies[i].vote_count %></p>
-                        <p class="title">Votes</p>
-                     </div>
-                  </div>
-                </div>
-            </div>
-            </a>
-            <% } %>
-                <% include footer %>
+        <div class="col-sm-12">
+            <div class="content">
+                <% if(movies.length === 0) { %>
+                    <div class="text-center">
+                        <h3>No results found. Please search again.</h3>
+                    </div>
+                <% } else {                
+                for( i= 0; i < movies.length; i++) { 
+                    if (search == true) { %>
+                        <a class="movie-link" href="/movie/<%= movies[i].id + '?search=true' %>">
+                    <% } else { %>
+                        <a class="movie-link" href="/movie/<%= movies[i].id %>">
+                    <% } %>        
+                            <div class="movie">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <div class="poster"><img src="<%= baseUrl %><%= movies[i].poster_path %>"></div>
+                                    </div>
+                                <div class="col-xs-12 col-sm-6 col-md-7">
+                                    <div class="header-text">
+                                        <h2><%= movies[i].title %></h2>
+                                        <p class="description"><%= movies[i].overview %></p>
+                                        <p class="url">Release Date: <%= movies[i].release_date %></p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 col-md-2">
+                                    <div class="followers">
+                                        <p class="value"><%= movies[i].vote_count %></p>
+                                        <p class="title">Votes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <% } 
+                } %>
+            <% include footer %>
             

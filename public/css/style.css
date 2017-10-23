@@ -1,17 +1,11 @@
 /* Base Styles
 --------------------------------------------- */
-html {
-	height: 100%;
-}
-
 body {
-	min-height: 100%;
-	position: relative;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	line-height: 1.5;
 	color: #484848;
-	padding-bottom: 50px;
+	padding: 20px 0;
 }
 
 h1 {
@@ -33,26 +27,29 @@ h2 {
 
 a {
 	color: #484848;
-	text-decoration: none;
 	display: block;
 }
 
-a:focus, a:hover {
+a:focus, 
+a:hover {
     color: #484848;
     text-decoration: none;
 }
 
+
+/* Site-header
+--------------------------------------------- */
 .site-header {
 	text-align: right;
+}
+
+.site-header h1 {
+	margin-bottom: 30px;
 }
 
 .nav {
 	text-align: left;
 	margin-left: 10px;
-}
-
-.nav a {
-	margin: 30px 0 15px;
 }
 
 .page-links a {
@@ -61,18 +58,29 @@ a:focus, a:hover {
 
 .disabled {
 	pointer-events: none;
-	color: grey;
+	color: #484848;
+	background-color: #ddd !important;
+}
+
+.search {
+	margin-bottom: 15px;
 }
 
 .form-control {
-    height: 50px;
-    padding: 0.333em 0.666em;
-    font-size: 1.123em;
+    height: 42px;
+    padding: 0.5em 1em;
+	font-size: 1.1em;
+	line-height: 1;
     border: 1px solid #ccc;
     box-shadow: none;
-    border-radius: 4px;
-	width: 100%;
-	margin-top: 30px;
+	border-radius: 4px;
+	margin: -4px 0 0;
+}
+
+@media (max-width: 767px) {
+	.form-control {
+		margin: 10px 0;
+	}
 }
 
 .form-control:focus {
@@ -83,27 +91,37 @@ a:focus, a:hover {
 }
 
 
-.site-header a, button {
-	padding: .6em 1.25em;
+.site-header a,
+button {
+	height: 42px;
+    padding: 0.5em 1em;
     border: 1px solid #ccc;
-    margin-bottom: 1em;
     border-radius: 4px;
     color: #484848;
-    font-size: 1.25em;
+	font-size: 1.1em;
+	line-height: 1.25;
 	font-weight: 300;
 	background: transparent;
 	display: inline-block;
 }
 
-.site-header a:hover, .site-header a:focus {
+.site-header a:hover,
+.site-header a:focus {
     text-decoration: none;
     outline: none;
 }
 
-.page-links a:hover, button:hover {
+.page-links a:hover,
+button:hover {
     background-color: #484848;
     color: #fff;
-} 
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+	button {
+		margin-top: 10px;
+	}
+}
 
 .page-links a {
 	margin-top: 0;
@@ -128,7 +146,7 @@ a:focus, a:hover {
 
 /* Content
 --------------------------------------------- */
-.channel {
+.movie {
 	border: 1px solid #cacaca;
 	margin: 1.428em 0;
 	border-radius: 10px;
@@ -136,31 +154,21 @@ a:focus, a:hover {
 }
 
 @media (min-width: 768px) {
-	.channel > .row {
+	.movie > .row {
 		display: flex;
 	}
 
-	.channel > .row > div:nth-child(3) {
+	.movie > .row > div:nth-child(3) {
 		border-left: 1px dashed #b5b5b5;
 	}
 }
 
-.channel .description {
+.movie .description {
 	font-weight: 400;
 	color: #777;
 }
 
-.offline h2,
-.offline .description {
-	color: #faa66f;
-}
-
-.account-closed h2,
-.account-closed .description {
-	color: #f00;
-}
-
-.channel .url {
+.movie .url {
 	font-style: italic;
 	background-color: #f1f1f1;
 	font-size: 0.857em;
@@ -174,22 +182,13 @@ a:focus, a:hover {
 	text-align: center;
 }
 
-.poster img {
-	max-width: 100%;
-}
-
 .movie-poster {
 	text-align: center;
 }
 
+.poster img,
 .movie-poster img {
-	border-radius: 10px;
 	max-width: 100%;
-}
-
-.header-text {
-	float: left;
-	width: 88%;
 }
 
 .header-text p {
@@ -221,7 +220,6 @@ dd {
 
 .inner-header .followers {
 	border-left: none;
-	height: auto;
 }
 
 .followers .value {
@@ -240,47 +238,19 @@ dd {
 	text-transform: uppercase;
 }
 
-@media (max-width: 1199px) and (min-width: 992px) {
-	.logo {
-		width: 15%;
-	}
-	
-	.header-text {
-		width: 85%;
-	}
-}
-
 @media (max-width: 991px) and (min-width: 768px) {
-	.logo {
-		width: 20%;
-	}
-	
-	.header-text {
-		width: 80%;
-	}
-	
 	.followers .value {
 		font-size: 2.857em;
 	}
 }
 
 @media (max-width: 767px) {
-	.channel {
+	.movie {
 		padding: 2em;
 	}
 	
-	.channel .row:first-child {
-    margin-bottom: 15px;
-	}
-	
-	.channel .url {
-		max-width: 100%;
-		word-wrap: break-word;
-	}
-	
-	.logo {
-		width: 100%;
-		text-align: center;
+	.movie .row:first-child {
+    	margin-bottom: 15px;
 	}
 	
 	.header-text {
@@ -329,5 +299,4 @@ dd {
 	padding: 1em 0;
 	text-align: center;
 	font-size: 14px;
-
 }
