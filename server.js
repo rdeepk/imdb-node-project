@@ -7,7 +7,11 @@ var imdbApiKey = "6b41a668e25ec6c8670df1fc29641a7d";
 var imdbRequestUrl = "https://api.themoviedb.org/3/discover/movie?api_key=" + imdbApiKey + "&sort_by=popularity.desc";
 var imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbApiKey;
 var results, searchResults;
-var port = process.argv[2] || 7000;
+var port = process.env.PORT || 7000;
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+}
 
 const app = express();
 app.use(express.static('public'));
