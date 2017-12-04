@@ -24,7 +24,7 @@
                                     // check if valid previous page link exists
                                     if (( currentPage > 1)) { 
 
-                                        //if prvious page link is for search request or random movies from home page
+                                        //if previous page link is for search request or random movies from home page
                                         if(search) { %>
                                             <a href="/search?query=<%= searchStr %>&page=<%= Number(currentPage)-1 %>" id="previous">Previous</a>
                                         <% } else { %>
