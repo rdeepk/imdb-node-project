@@ -9,16 +9,16 @@ var imdbSearchRequestUrl = "https://api.themoviedb.org/3/search/movie?api_key=" 
 var results, searchResults;
 var port = process.env.PORT || 7000;
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('build'));
-}
-
 const app = express();
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+}
 
 /**
  * @summary Respond to get request for Home link.
